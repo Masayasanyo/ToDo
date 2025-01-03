@@ -1,0 +1,225 @@
+body {
+    margin: 0px;
+    background-color: #D8C4B6;
+    height: 100vh;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Main */
+.main {
+    flex-grow: 1;
+}
+
+
+/* Header */
+header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    background-color: #213555;
+    color: #F5EFE7;
+    width: 200px;
+    padding-left: 50px;
+}
+
+.link-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.link {
+    text-decoration:none;
+    color: gray;
+    margin: auto auto auto 0px;
+}
+
+.link:hover {
+    color: #F5EFE7; 
+}
+
+.active {
+    color: #F5EFE7; 
+}
+
+
+/* Home */
+.home {
+    display: flex;
+    justify-content: center;
+}
+
+.tasks {
+    background-color: #3E5879;
+    border-radius: 20px;
+    color: #F5EFE7;
+    padding: 20px 40px 20px 40px;
+    width: 50%;
+    margin: 100px 0px 100px 0px;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.checkmark {
+    border-radius: 50px;
+    background-color: #3E5879;
+    color: #F5EFE7;
+    font-weight: bold;
+    border-color: #F5EFE7;
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+}
+
+.new-task-container .new {
+    margin: 10px 10px 10px auto;
+    border-radius: 20px;
+    padding: 5px 10px 5px 10px;
+    background-color: #D8C4B6;
+    color: #3E5879;
+    font-weight: bold;
+    border: #D8C4B6;
+}
+
+.new-task {
+    display: flex;
+}
+
+.add-button {
+    border-radius: 50px;
+    background-color: #D8C4B6;
+    color: #3E5879;
+    font-weight: bold;
+    border-color: #D8C4B6;
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+}
+
+.task-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.task-input .taskname {
+    border-color: #F5EFE7;
+    height: 20px;
+}
+
+.task-input .description {
+    border-color: #F5EFE7;
+    height: 20px;
+}
+
+.time-container {
+    margin-top: 20px;
+}
+
+/* Profile */
+.profile {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Login */
+.login-container {
+    background-color: #3E5879;
+    color: #F5EFE7;
+    border-radius: 20px;
+    padding: 20px 40px 20px 40px;
+    margin: 20px;
+}
+
+.login-input {
+    border-radius: 20px;
+    height: 40px;
+    width: 250px;
+}
+
+.login-continue {
+    display: flex;
+    margin: 30px auto 30px auto;
+    border-radius: 20px;
+    padding: 10px 20px 10px 20px;
+    background-color: #D8C4B6;
+    color: #3E5879;
+    font-weight: bold;
+    font-size: large;
+    border: #D8C4B6;
+}
+
+
+/* Sign up */
+.signUp-container {
+    background-color: #3E5879;
+    color: #F5EFE7;
+    border-radius: 20px;
+    padding: 20px 40px 20px 40px;
+    margin: 20px;
+}
+
+.signup-input {
+    border-radius: 20px;
+    height: 40px;
+    width: 250px;
+}
+
+.signup-continue {
+    display: flex;
+    margin: 30px auto 30px auto;
+    border-radius: 20px;
+    padding: 10px 20px 10px 20px;
+    background-color: #D8C4B6;
+    color: #3E5879;
+    font-weight: bold;
+    font-size: large;
+    border: #D8C4B6;
+}
+
+
+/* mypage */
+.mypage-container {
+    background-color: #3E5879;
+    color: #F5EFE7;
+    border-radius: 20px;
+    padding: 20px 40px 20px 40px;
+    margin: 20px;
+}
+
+.profile-button {
+    display: flex;
+}
+
+.username {
+    text-align: center;
+}
+
+
+/* Footer */
+footer {
+    background-color: #213555;
+    text-align: center;
+    padding: 50px;
+    margin-top: 50px;
+    color: #D8C4B6;
+}
+
+.create-task-button {
+    margin: 10px 10px 10px auto;
+    border-radius: 20px;
+    padding: 5px 10px 5px 10px;
+    background-color: #D8C4B6;
+    color: #3E5879;
+    font-weight: bold;
+    border: #D8C4B6;
+}
