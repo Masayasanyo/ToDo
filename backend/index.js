@@ -60,6 +60,7 @@ app.post('/login', async (req, res) => {
 
 app.post('/todo', async (req, res) => {
     const {account_id, taskname, description, deadline, deadline_time, progress} = req.body;
+    console.log(deadline);
     if (!account_id) {
         return res.status(400).json({ error: 'Account ID is required' });
     }

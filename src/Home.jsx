@@ -7,16 +7,24 @@ function Home({ user }) {
     const [isAdding, setIsAdding] = useState(false);
     const [addDate, setAddDate] = useState(false);
     const [addTime, setAddTime] = useState(false);
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const [selectedTime, setSelectedTime] = useState("23:59");
+    // const [selectedDate, setSelectedDate] = useState(new Date());
+    // const [selectedTime, setSelectedTime] = useState("23:59");
     const [userTask, setUserTask] = useState(null);
+
+
+    const [dateAndTime, setDateAndTime] = useState({
+        deadline_date: new Date().toISOString().split('T')[0], 
+        deadline_time: '23:59:00', 
+    });
+
+    // const dateInJST = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
 
 
     const [formData, setFormData] = useState({
         account_id: user.id, 
         taskname: "", 
         description: "",
-        deadline: selectedDate, 
+        deadline: `${dateAndTime.deadline_date}T${dateAndTime.deadline_time}`, 
         deadline_time: '23:59:59', 
         progress: false, 
     });
@@ -53,19 +61,19 @@ function Home({ user }) {
         }
     }
 
-    const generateTimes = () => {
-        const times = [];
-        for (let hour = 0; hour < 24; hour++) {
-            for (let minute = 0; minute < 60; minute += 15) {
-            const formattedHour = String(hour).padStart(2, "0");
-            const formattedMinute = String(minute).padStart(2, "0");
-            times.push(`${formattedHour}:${formattedMinute}`);
-            }
-        }
-        return times;
-    };
+    // const generateTimes = () => {
+    //     const times = [];
+    //     for (let hour = 0; hour < 24; hour++) {
+    //         for (let minute = 0; minute < 60; minute += 15) {
+    //         const formattedHour = String(hour).padStart(2, "0");
+    //         const formattedMinute = String(minute).padStart(2, "0");
+    //         times.push(`${formattedHour}:${formattedMinute}`);
+    //         }
+    //     }
+    //     return times;
+    // };
     
-    const times = generateTimes();
+    // const times = generateTimes();
     
     const handleAddTask = () => {
         setIsAdding(true);
@@ -85,6 +93,10 @@ function Home({ user }) {
         setIsAdding(false);
         setAddDate(false);
         setAddTime(false);
+        setFormData({
+            ...formData,
+            deadline: `${dateAndTime.deadline_date}T${dateAndTime.deadline_time}`, 
+        });
         await handleSubmit();
         window.location.reload(); 
     }
@@ -101,7 +113,7 @@ function Home({ user }) {
         setAddTime(false);
         setFormData({
             ...formData,
-            deadline: selectedDate.toLocaleDateString(), 
+            deadline: `${dateAndTime.deadline_date}T${dateAndTime.deadline_time}`, 
         });
     }
 
@@ -122,7 +134,7 @@ function Home({ user }) {
         setAddTime(false);
         setFormData({
             ...formData,
-            deadline_time: selectedTime, 
+            deadline: `${dateAndTime.deadline_date}T${dateAndTime.deadline_time}`, 
         });
     }
 
@@ -192,11 +204,10 @@ function Home({ user }) {
                                     <h2>{task.taskname}</h2>
                                     <h3>{task.description}</h3>
                                 </div>
-                                <h3>{task.deadline}</h3>
-                                <h3>{task.deadline_time}</h3>
-                                <div>
-
-                                </div>
+                                <h3>{task.deadline.split('T')[0]}_</h3>
+                                <h3>{task.deadline.split('T')[1].split('.')[0].split(':')[0]}</h3>
+                                <h3>:</h3>
+                                <h3>{task.deadline.split('T')[1].split('.')[0].split(':')[1]}</h3>
                             </div>
                             <hr />
                         </div>
@@ -240,9 +251,10 @@ function Home({ user }) {
                                 <div className='date-container'>
                                     <div className='date-header'>
                                         <h2>Date</h2>
-                                        <h2>{selectedDate.toLocaleDateString()}</h2>
+                                        <h2>{dateAndTime.deadline_date}</h2>
                                     </div>
-                                    <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} setFormData={setFormData} formData={formData}/>
+                                    {/* <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} setFormData={setFormData} formData={formData}/> */}
+                                    <Calendar dateAndTime={dateAndTime} setDateAndTime={setDateAndTime} />
                                     <div>
                                         <button className='create-task-button' onClick={handleTime}>Time</button>
                                         <button className='create-task-button' onClick={handleCancelDate}>Cancel</button>
@@ -251,11 +263,12 @@ function Home({ user }) {
                                 </div>
                                 <div className='time-header'>
                                     <h2>Time</h2>
-                                    <h2>{selectedTime}</h2>
+                                    <h2>{dateAndTime.deadline_time}</h2>
                                 </div>   
                             {addTime && (
                                 <div className='time-container'>                                 
-                                    <TimeSpinner selectedTime={selectedTime} times={times} setSelectedTime={setSelectedTime} setFormData={setFormData}  formData={formData} />
+                                    {/* <TimeSpinner selectedTime={selectedTime} times={times} setSelectedTime={setSelectedTime} setFormData={setFormData}  formData={formData} /> */}
+                                    <TimeSpinner dateAndTime={dateAndTime} setDateAndTime={setDateAndTime} />
                                     <button className='create-task-button' onClick={handleCancelTime} >Cancel</button>
                                     <button className='create-task-button' onClick={handleApplyTime}>Apply</button>
                                 </div>

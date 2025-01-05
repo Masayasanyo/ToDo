@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Calendar({selectedDate, setSelectedDate, setFormData, formData}) {
+function Calendar({ dateAndTime, setDateAndTime }) {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const getFirstDayOfMonth = (date) => {
@@ -31,13 +31,10 @@ function Calendar({selectedDate, setSelectedDate, setFormData, formData}) {
 
   const handleDateClick = (date) => {
     if (date) {
-      const selectedDate = new Date(Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), date));
-      selectedDate.setUTCHours(0, 0, 0, 0);
-      
-      setSelectedDate(selectedDate);
-      setFormData({
-        ...formData,
-        deadline: selectedDate, 
+      const selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), date);
+      setDateAndTime({
+        ...dateAndTime,
+        deadline_date: selectedDate.toISOString().split('T')[0], 
       });
     }
   };
@@ -47,10 +44,6 @@ function Calendar({selectedDate, setSelectedDate, setFormData, formData}) {
     newDate.setMonth(currentDate.getMonth() + direction);
     setCurrentDate(newDate);
   };
-
-  useEffect(() => {
-    console.log('Selected Date:', selectedDate); 
-  }, [selectedDate]);
 
   return (
     <div>
@@ -70,7 +63,9 @@ function Calendar({selectedDate, setSelectedDate, setFormData, formData}) {
               textAlign: 'center',
               padding: '10px',
               cursor: day ? 'pointer' : 'default',
-              backgroundColor: day === selectedDate?.getDate() ? 'lightblue' : 'transparent',
+              // backgroundColor: day === dateAndTime?.deadline_date?.getDate() ? 'lightblue' : 'transparent',
+              backgroundColor: day === new Date(dateAndTime.deadline_date).getDate() ? 'lightblue' : 'transparent',
+
             }}
             onClick={() => handleDateClick(day)}
           >

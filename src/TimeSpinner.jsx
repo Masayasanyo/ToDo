@@ -1,14 +1,27 @@
 import React, { useState } from "react";
 
-const TimeSpinner = ({ selectedTime, times, setSelectedTime, setFormData, formData }) => {
+const TimeSpinner = ({ dateAndTime, setDateAndTime }) => {
 
   const handleTime = (time) => {
-    setSelectedTime(time);
-    setFormData({
-      ...formData,
+    setDateAndTime({
+      ...dateAndTime,
       deadline_time: time, 
     });
   }
+
+  const generateTimes = () => {
+    const times = [];
+    for (let hour = 0; hour < 24; hour++) {
+        for (let minute = 0; minute < 60; minute += 15) {
+        const formattedHour = String(hour).padStart(2, "0");
+        const formattedMinute = String(minute).padStart(2, "0");
+        times.push(`${formattedHour}:${formattedMinute}`);
+        }
+    }
+    return times;
+  };
+
+  const times = generateTimes();
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "black", }}>
@@ -31,7 +44,7 @@ const TimeSpinner = ({ selectedTime, times, setSelectedTime, setFormData, formDa
             style={{
               padding: "10px",
               cursor: "pointer",
-              backgroundColor: selectedTime === time ? "#f0f0f0" : "white",
+              backgroundColor: dateAndTime.deadline_time === time ? "#f0f0f0" : "white",
             }}
           >
             {time}
