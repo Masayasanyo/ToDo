@@ -31,10 +31,13 @@ function Calendar({selectedDate, setSelectedDate, setFormData, formData}) {
 
   const handleDateClick = (date) => {
     if (date) {
-      setSelectedDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), date));
+      const selectedDate = new Date(Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), date));
+      selectedDate.setUTCHours(0, 0, 0, 0);
+      
+      setSelectedDate(selectedDate);
       setFormData({
         ...formData,
-        deadline: new Date(currentDate.getFullYear(), currentDate.getMonth(), date), 
+        deadline: selectedDate, 
       });
     }
   };

@@ -1,9 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { Pool } = require('pg');
 const bcrypt = require('bcrypt'); 
-require('dotenv').config();
 
 const db = new Pool({
     user: process.env.DB_USER,
@@ -58,19 +58,55 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// app.post('/todo', async (req, res) => {
-//     const {account_id, taskname, description, deadline, deadline_time, progress} = req.body;
-//     try {
-//         const result = await db.query(
-//             'INSERT INTO todo (account_id, taskname, description, deadline, deadline_time, progress) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-//             [account_id, taskname, description, deadline, deadline_time, progress]
-//         );
-//         res.status(201).json({ message: 'Success', user: result.rows[0] }); 
-//     } catch (error) {
-//         console.error('Error:', error);
-//         res.status(500).json({ error: 'Server error' });
-//     }
-// });
+app.post('/todo', async (req, res) => {
+    const {account_id, taskname, description, deadline, deadline_time, progress} = req.body;
+    if (!account_id) {
+        return res.status(400).json({ error: 'Account ID is required' });
+    }
+    try {
+        const result = await db.query(
+            'INSERT INTO todo (account_id, taskname, description, deadline, deadline_time, progress) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+            [account_id, taskname, description, deadline, deadline_time, progress]
+        );
+        res.status(201).json({ message: 'successful', todo: result.rows[0] }); 
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+app.post('/usertodo', async (req, res) => {
+    const { id } = req.body;
+    try {
+        const result = await db.query(
+            'SELECT * FROM todo WHERE account_id = $1',
+            [id]
+        );
+        if (result.rows.length > 0) {
+            const usertodo = result.rows;
+            res.status(200).json({ message: 'Success', usertodo: usertodo });
+        } else {
+            res.status(200).json({ message: 'Task not found' });
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+app.post('/check', async (req, res) => {
+    const { id } = req.body;
+    try {
+        const result = await db.query(
+            'UPDATE todo SET progress = true WHERE id = $1 RETURNING *',
+            [id]
+        );
+        res.status(200).json({ message: 'Success', task: result.rows[0] }); 
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
 
 const PORT = 3001;
 app.listen(PORT, () => {

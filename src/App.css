@@ -4,14 +4,8 @@ body {
     height: 100vh;
 }
 
-.app {
-    display: flex;
-    min-height: 100vh;
-}
-
-/* Main */
-.main {
-    flex-grow: 1;
+hr {
+    margin: 20px 0px 20px 0px;
 }
 
 
@@ -24,7 +18,9 @@ header {
     background-color: #213555;
     color: #F5EFE7;
     width: 200px;
-    padding-left: 50px;
+    padding-left: 20px;
+    position: fixed;
+    height: 100vh; 
 }
 
 .link-container {
@@ -47,6 +43,18 @@ header {
     color: #F5EFE7; 
 }
 
+footer {
+    color: #D8C4B6;
+    font-size: 1rem;
+    margin: auto 0px 20px 0px;
+}
+
+
+/* main */
+.main {
+    margin-left: 220px;
+}
+
 
 /* Home */
 .home {
@@ -54,13 +62,17 @@ header {
     justify-content: center;
 }
 
-.tasks {
+.todo {
+    width: 450px;
     background-color: #3E5879;
     border-radius: 20px;
     color: #F5EFE7;
-    padding: 20px 40px 20px 40px;
-    width: 50%;
-    margin: 100px 0px 100px 0px;
+    margin: 50px auto 50px auto;
+    padding: 30px 60px 30px 60px;
+}
+
+.todo h1 {
+    text-align: center;
 }
 
 .task {
@@ -77,32 +89,27 @@ header {
     border-color: #F5EFE7;
     height: 30px;
     width: 30px;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
-.new-task-container .new {
-    margin: 10px 10px 10px auto;
-    border-radius: 20px;
-    padding: 5px 10px 5px 10px;
-    background-color: #D8C4B6;
-    color: #3E5879;
-    font-weight: bold;
-    border: #D8C4B6;
-}
-
-.new-task {
+.create-task {
     display: flex;
+    align-items: flex-start;
 }
 
-.add-button {
+.create-task h2 {
+    margin: 0px;
+}
+
+.add-task-button {
+    height: 30px;
+    width: 30px;
     border-radius: 50px;
     background-color: #D8C4B6;
     color: #3E5879;
     font-weight: bold;
-    border-color: #D8C4B6;
-    height: 30px;
-    width: 30px;
-    margin-right: 10px;
+    border: #D8C4B6;
+    margin-right: 20px;
 }
 
 .task-input {
@@ -112,17 +119,45 @@ header {
 
 .task-input .taskname {
     border-color: #F5EFE7;
-    height: 20px;
+    height: 30px;
+    width: 360px;
 }
 
 .task-input .description {
     border-color: #F5EFE7;
-    height: 20px;
+    height: 30px;
+    width: 360px;
 }
 
-.time-container {
-    margin-top: 20px;
+
+/* Date container */
+.create-task h2 {
+    margin: 0px 10px 0px 10px;
 }
+.date-container {
+    margin-top: 10px;
+}
+
+.date-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+
+/* Time container*/
+.time-container {
+    margin-top: 30px;
+}
+
+.time-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
 
 /* Profile */
 .profile {
@@ -131,13 +166,49 @@ header {
 }
 
 
+/* My page */
+.mypage-container {
+    width: 200px;
+    height: 200px;
+    background-color: #3E5879;
+    border-radius: 20px;
+    color: #F5EFE7;
+    margin: 50px auto 50px auto;
+    padding: 30px 60px 30px 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-button {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+}
+
+.profile-button button {
+    margin: 10px 10px 10px 0px;
+    border-radius: 20px;
+    padding: 5px 10px 5px 10px;
+    background-color: #D8C4B6;
+    color: #3E5879;
+    font-weight: bold;
+    border: #D8C4B6;
+}
+
+.username {
+    text-align: center;
+}
+
+
 /* Login */
 .login-container {
     background-color: #3E5879;
-    color: #F5EFE7;
     border-radius: 20px;
-    padding: 20px 40px 20px 40px;
-    margin: 20px;
+    color: #F5EFE7;
+    margin: 50px auto 50px auto;
+    padding: 30px 60px 30px 60px;
+    display: flex;
+    flex-direction: column;    
 }
 
 .login-input {
@@ -162,10 +233,12 @@ header {
 /* Sign up */
 .signUp-container {
     background-color: #3E5879;
-    color: #F5EFE7;
     border-radius: 20px;
-    padding: 20px 40px 20px 40px;
-    margin: 20px;
+    color: #F5EFE7;
+    margin: 50px auto 50px auto;
+    padding: 30px 60px 30px 60px;
+    display: flex;
+    flex-direction: column;    
 }
 
 .signup-input {
@@ -186,36 +259,8 @@ header {
     border: #D8C4B6;
 }
 
-
-/* mypage */
-.mypage-container {
-    background-color: #3E5879;
-    color: #F5EFE7;
-    border-radius: 20px;
-    padding: 20px 40px 20px 40px;
-    margin: 20px;
-}
-
-.profile-button {
-    display: flex;
-}
-
-.username {
-    text-align: center;
-}
-
-
-/* Footer */
-footer {
-    background-color: #213555;
-    text-align: center;
-    padding: 50px;
-    margin-top: 50px;
-    color: #D8C4B6;
-}
-
 .create-task-button {
-    margin: 10px 10px 10px auto;
+    margin: 10px 10px 10px 0px;
     border-radius: 20px;
     padding: 5px 10px 5px 10px;
     background-color: #D8C4B6;
